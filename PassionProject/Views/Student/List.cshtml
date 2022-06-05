@@ -1,0 +1,12 @@
+﻿@Model IEnumerable<PassionProject.Models.Student>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+@foreach(var student in Model)
+{
+    <h2>@student.FirstName</h2>
+    <div>@student.LastName</div>
+}
+
