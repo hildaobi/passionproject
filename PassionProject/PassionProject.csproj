@@ -182,10 +182,13 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+<<<<<<< HEAD
     <Compile Include="Controllers\ActivityController.cs" />
     <Compile Include="Controllers\ActivityDataController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\CoursesDataController.cs" />
+=======
+>>>>>>> d8c5891b2468e175134fdc206cfae6f8b3e0b55d
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -241,10 +244,13 @@
     <Compile Include="Migrations\202206032341100_activity2.designer.cs">
       <DependentUpon>202206032341100_activity2.cs</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Migrations\202206081359018_activity3.cs" />
     <Compile Include="Migrations\202206081359018_activity3.designer.cs">
       <DependentUpon>202206081359018_activity3.cs</DependentUpon>
     </Compile>
+=======
+>>>>>>> d8c5891b2468e175134fdc206cfae6f8b3e0b55d
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -318,8 +324,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+<<<<<<< HEAD
     <Folder Include="Views\Activity\" />
     <Folder Include="Views\Course\" />
+=======
+>>>>>>> d8c5891b2468e175134fdc206cfae6f8b3e0b55d
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -371,9 +380,12 @@
     <EmbeddedResource Include="Migrations\202206032341100_activity2.resx">
       <DependentUpon>202206032341100_activity2.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
     <EmbeddedResource Include="Migrations\202206081359018_activity3.resx">
       <DependentUpon>202206081359018_activity3.cs</DependentUpon>
     </EmbeddedResource>
+=======
+>>>>>>> d8c5891b2468e175134fdc206cfae6f8b3e0b55d
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

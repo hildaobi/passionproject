@@ -18,6 +18,7 @@ namespace PassionProject.Models
 
     public ICollection<Activity> Activities { get; set; }
     }
+<<<<<<< HEAD
 
     public class CourseDto
     {
@@ -27,4 +28,6 @@ namespace PassionProject.Models
 
        
     }
+=======
+>>>>>>> d8c5891b2468e175134fdc206cfae6f8b3e0b55d
 }
