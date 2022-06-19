@@ -25,7 +25,7 @@ namespace PassionProject.Models
         {
         }
         //using entity frame work to bild the table in the database
-        public DbSet<Person> Persons { get; set; }
+        //public DbSet<Person> Persons { get; set; }
 
         public DbSet<Student> Students { get; set; }
 

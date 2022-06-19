@@ -1,0 +1,25 @@
+﻿@model PassionProject.Models.StudentDto
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<a href="/Student/List">Go back to List</a>
+
+<a href="/Student/Update/{id}" >Update</a>
+<a href="/Student/Delete/?StudentId">Delete</a>
+<br />
+<form action="/Student/Delete?@Model.StudentId" method="POST">
+    <input type="text" value=" @Model.FirstName" />
+    <br />
+
+    <input type="text" value="@Model.LastName" />
+    <input type="text" value="@Model.StudentId" />
+    <div>
+        <input type="submit" value="Add" />
+    </div>
+</form>
+
+

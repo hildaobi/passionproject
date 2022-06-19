@@ -1,12 +1,37 @@
-﻿@Model IEnumerable<PassionProject.Models.Student>
-@{
-    ViewBag.Title = "List";
-}
+﻿@model IEnumerable<PassionProject.Models.StudentDto>
 
-<h2>List</h2>
-@foreach(var student in Model)
-{
-    <h2>@student.FirstName</h2>
-    <div>@student.LastName</div>
-}
+    @{
+        ViewBag.Title = "List";
+    }
 
+    <h2>List</h2>
+    <table>
+        <tr>
+            <th>
+               <h3>Names</h3>
+            </th>
+            <th>
+                <h3> Functions</h3>
+            </th>
+        </tr>
+            <a href="/Student/New">New Student</a>
+            @foreach (var student in Model)
+            {
+
+                <tr>
+                    <td>
+                        <h4>  @student.FirstName   @student.LastName  </h4>
+
+                    </td>
+                    
+                    <td>
+                    <a href="/Student/Edit/@student.StudentId">Edit</a>
+
+                        <a href="/Student/DeleteConfirm/@student.StudentId">Delete</a>
+                       
+                    </td>
+                </tr>
+             }
+
+
+    </table>

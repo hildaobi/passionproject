@@ -29,7 +29,7 @@ namespace PassionProject.Controllers
                 StudentId = a.StudentId,
                 FirstName = a.FirstName,
                 LastName = a.LastName,
-               // CourseName = a.Course.CourseName
+                //Courses = a.Courses.Courses
             }));
 
             return StudentDtos;
@@ -81,14 +81,16 @@ namespace PassionProject.Controllers
             {
                 if (!StudentExists(id))
                 {
+                    Debug.WriteLine("Animal not found");
                     return NotFound();
                 }
                 else
                 {
                     throw;
                 }
+               
             }
-
+            Debug.WriteLine("none of the conditions trigger");
             return StatusCode(HttpStatusCode.NoContent);
         }
 

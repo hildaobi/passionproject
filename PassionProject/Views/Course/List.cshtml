@@ -1,0 +1,16 @@
+﻿
+@model IEnumerable<PassionProject.Models.CourseDto>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+<a href="/Course/New">New Course</a>
+@foreach (var course in Model)
+{
+    <h2><a href="/Course/Details/@course.CourseCode">@course.CourseName</a></h2>
+   
+
+
+}

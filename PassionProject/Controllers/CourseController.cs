@@ -6,117 +6,170 @@ using System.Web.Mvc;
 using System.Net.Http;
 using System.Diagnostics;
 using PassionProject.Models;
+using System.Web.Script.Serialization;
+using PassionProject.Models.ViewModel;
 
 namespace PassionProject.Controllers
 {
     public class CourseController : Controller
     {
+        private static readonly HttpClient client;
+        private JavaScriptSerializer jss = new JavaScriptSerializer();
+
+        static CourseController()
+        {
+            client = new HttpClient();
+            client.BaseAddress = new Uri("https://localhost:44302/api/");
+        }
+
         // GET: Course/List
         public ActionResult List()
         {
-            //to communicate with CourseData  api controller to access list of Courses
-            //curl https://localhost:44302/api/Coursedata/listcourses
+            //to communicate with CoursetData  api controller to access list of Courses
+            //curl https://localhost:44302/api/Coursesdata/listcourses
 
-            HttpClient client = new HttpClient() { };
-            string url = "https://localhost:44302/api/Coursedata/listCourses";
+            string url = "coursesdata/listcourses";
             HttpResponseMessage response = client.GetAsync(url).Result;
 
-            Debug.WriteLine("the code is");
-            Debug.WriteLine(response.StatusCode);
+           // Debug.WriteLine("the code is");
+            //Debug.WriteLine(response.StatusCode);
 
             IEnumerable<CourseDto> courses = response.Content.ReadAsAsync<IEnumerable<CourseDto>>().Result;
-            Debug.WriteLine("Courses number:");
-            Debug.WriteLine(courses.Count());
-
+            
             return View(courses);
         }
 
-        // GET: Course/Details/3
+        // GET: course/Details/1
         public ActionResult Details(int id)
         {
-            //to communicate with CourseData  api controller to access one of Courses
-            //curl https://localhost:44302/api/Coursedata/findcourse/{id}
+            //to communicate with StudentData  api controller to access one Student
+            //curl https://localhost:44302/api/Coursesdata/findcourse/{id}
 
-            HttpClient client = new HttpClient() { };
-            string url = "https://localhost:44302/api/Coursedata/findcourse/" + id;
+            string url = "coursesdata/findcourse/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
-            Debug.WriteLine("the code is");
-            Debug.WriteLine(response.StatusCode);
 
             CourseDto selectedcourse = response.Content.ReadAsAsync<CourseDto>().Result;
-            Debug.WriteLine("Courses npresent:");
-            Debug.WriteLine(selectedcourse.CourseName);
+            //Debug.WriteLine("Students present:");
+            //Debug.WriteLine(selectedstudent.FirstName);
 
 
             return View(selectedcourse);
         }
 
-        // GET: Course/Create
-        public ActionResult Create()
+        public ActionResult Error()
+        {
+            return View();
+        }
+        // GET: Student/New
+        public ActionResult New()
         {
             return View();
         }
 
-        // POST: Course/Create
+        // POST: Student/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Student student)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            Debug.WriteLine("jsonpayload is working");
 
-                return RedirectToAction("Index");
-            }
-            catch
+            //curl -H "Content-Type:application/json" -d @student.json https://localhost:44302/api/Studentdata/addstudent
+            string url = "studentdata/addstudent";
+
+
+            string jsonpayload = jss.Serialize(student);
+
+            Debug.WriteLine(jsonpayload);
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
             }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+
         }
 
-        // GET: Course/Edit/3
+        // GET: Student/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+           // UpdateStudent ViewModel = new UpdateStudent();
+
+            string url = "studentdata/findstudent/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            StudentDto selectedStudent = response.Content.ReadAsAsync<StudentDto>().Result;
+           // ViewModel.SelectedStudent = selectedStudent;
+
+            url = "coursedata/listcourses/";
+            response = client.GetAsync(url).Result;
+            IEnumerable<CourseDto> CourseOption = response.Content.ReadAsAsync<IEnumerable<CourseDto>>().Result;
+
+            //ViewModel.CourseOptions = CourseOption;
+
+            return View(selectedStudent);
         }
 
-        // POST: Course/Edit/3
+
+        // POST: Student/Update/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Update(int id, Student student)
         {
-            try
-            {
-                // TODO: Add update logic here
+            string url = "studentdata/Updatestudent";
 
-                return RedirectToAction("Index");
-            }
-            catch
+
+            string jsonpayload = jss.Serialize(student);
+
+            Debug.WriteLine(jsonpayload);
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
             }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+
         }
 
-        // GET: Course/Delete/3
+        // GET: Student/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Course/Delete/3
+        // POST: Student/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            try
-            {
-                // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
+            string url = "studentdata/Deletestudent";
+
+
+            string jsonpayload = jss.Serialize("");
+
+            Debug.WriteLine(jsonpayload);
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
             }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+
         }
     }
 }
-

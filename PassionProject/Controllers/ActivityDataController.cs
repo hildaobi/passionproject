@@ -29,7 +29,7 @@ namespace PassionProject.Controllers
             {
                 ActivityId = a.ActivityId,
                 StudentId = a.StudentId,
-                CourseCode = a.CourseCode
+              //  CourseCode = a.CourseCode
                 
             })); 
             return ActivityDtos;
@@ -45,7 +45,7 @@ namespace PassionProject.Controllers
             {
                 ActivityId = Activity.ActivityId,
                 StudentId = Activity.StudentId,
-                CourseCode = Activity.CourseCode
+               // CourseCode = Activity.CourseCode
             };
             if (Activity == null)
             {

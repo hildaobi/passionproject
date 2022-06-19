@@ -23,12 +23,14 @@ namespace PassionProject.Models
     }
    
      public class StudentDto
-    {
+     {
         public int  StudentId { get; set;}
 
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
-    }
+
+        public ICollection<Student> Courses { get;  set; }
+     }
 }
 
