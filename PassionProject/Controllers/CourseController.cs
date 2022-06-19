@@ -39,7 +39,7 @@ namespace PassionProject.Controllers
             return View(courses);
         }
 
-        // GET: course/Details/1
+        // GET: Course/Details/1
         public ActionResult Details(int id)
         {
             //to communicate with StudentData  api controller to access one Student
@@ -67,17 +67,17 @@ namespace PassionProject.Controllers
             return View();
         }
 
-        // POST: Student/Create
+        // POST: Course/Create
         [HttpPost]
-        public ActionResult Create(Student student)
+        public ActionResult Create(Course course)
         {
             Debug.WriteLine("jsonpayload is working");
 
-            //curl -H "Content-Type:application/json" -d @student.json https://localhost:44302/api/Studentdata/addstudent
-            string url = "studentdata/addstudent";
+            //curl -H "Content-Type:application/json" -d @student.json https://localhost:44302/api/Coursesdata/addcourse
+            string url = "coursesdata/addcourse";
 
 
-            string jsonpayload = jss.Serialize(student);
+            string jsonpayload = jss.Serialize(course);
 
             Debug.WriteLine(jsonpayload);
             HttpContent content = new StringContent(jsonpayload);
@@ -95,34 +95,28 @@ namespace PassionProject.Controllers
 
         }
 
-        // GET: Student/Edit/5
+        // GET: Course/Edit/5
         public ActionResult Edit(int id)
         {
-           // UpdateStudent ViewModel = new UpdateStudent();
+           
 
-            string url = "studentdata/findstudent/" + id;
+            string url = "coursesdata/findcourse/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
-            StudentDto selectedStudent = response.Content.ReadAsAsync<StudentDto>().Result;
-           // ViewModel.SelectedStudent = selectedStudent;
+            CourseDto selectedcourse = response.Content.ReadAsAsync<CourseDto>().Result;
+          
 
-            url = "coursedata/listcourses/";
-            response = client.GetAsync(url).Result;
-            IEnumerable<CourseDto> CourseOption = response.Content.ReadAsAsync<IEnumerable<CourseDto>>().Result;
-
-            //ViewModel.CourseOptions = CourseOption;
-
-            return View(selectedStudent);
+            return View(selectedcourse);
         }
 
 
-        // POST: Student/Update/5
+        // POST: Course/Update/5
         [HttpPost]
-        public ActionResult Update(int id, Student student)
+        public ActionResult Update(int id, Course course)
         {
-            string url = "studentdata/Updatestudent";
+            string url = "coursesdata/Updatecourse";
 
 
-            string jsonpayload = jss.Serialize(student);
+            string jsonpayload = jss.Serialize(course);
 
             Debug.WriteLine(jsonpayload);
             HttpContent content = new StringContent(jsonpayload);
@@ -140,18 +134,18 @@ namespace PassionProject.Controllers
 
         }
 
-        // GET: Student/Delete/5
+        // GET: Course/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Student/Delete/5
+        // POST: Course/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
 
-            string url = "studentdata/Deletestudent";
+            string url = "coursesdata/Deletecourse";
 
 
             string jsonpayload = jss.Serialize("");
